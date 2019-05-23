@@ -5,11 +5,13 @@ import com.karatay.fitdb.repository.DisciplineRepository;
 import com.karatay.fitdb.repository.InstructorRepository;
 import com.karatay.fitdb.service.InstructService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/instructors")
 public class InstructorController {
     @Autowired

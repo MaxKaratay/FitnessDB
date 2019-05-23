@@ -11,4 +11,5 @@ public interface SubscriptionRepository extends CrudRepository<Subscription, Lon
     int countSubscriptionByInstruct(Instruct instruct);
     Iterable<Subscription> findAllByClient(Client client);
     Iterable<Subscription> findAllByDurationEndGreaterThanEqual(Date date);
+    Iterable<Subscription> findAllByDurationEndGreaterThanEqualAndClient(Date date, Client client);
 }

@@ -18,7 +18,6 @@
     <@ci.search "clients"/>
     <#list clients as client>
         <div>
-            <b>${client.ID}</b>
             <span>${client.firstName}</span>
             <span>${client.lastName}</span>
             <i>${client.patronymic}</i>

@@ -1,24 +1,52 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    <div>Hello, ${name} !</div>
-    <div>
-        <a href="/clients"> Clients list</a>
-    </div>
-    <div>
-        <a href="/instructors"> Instructors list</a>
-    </div>
-    <div>
-        <a href="/disciplines"> Disciplines list</a>
-    </div>
-    <div>
-        <a href="/instructs"> Instruct </a>
-    </div>
-    <div>
-        <a href="/schedules"> Schedules </a>
-    </div>
-    <div>
-        <a href="/subscriptions">Subscriptions</a>
-    </div>
+    <div><h3>Hello, ${Session.SPRING_SECURITY_CONTEXT.authentication.principal.getUsername()} !</h3></div>
+    <#if subs??>
+        <div> All yours active subscriptions</div>
+        <#list subs as sub>
+            <fieldset style="float: left; margin: 10px; background: #fbffb2">
+                <span><i>Discipline:</i> ${sub.instruct.discipline.name}</span>
+                <p></p>
+                <span><i>Instructor:</i> ${sub.instruct.instructor.firstName} ${sub.instruct.instructor.lastName}</span>
+                <p></p>
+                <span><i>Price:</i> ${sub.instruct.price}</span>
+                <p></p>
+                <span><i>End date:</i> ${sub.durationEnd}</span>
+                <p></p>
+                <fieldset>
+                    <legend>Visiting days</legend>
+                    <#list sub.visits as v>
+                    <p><span>${v.schedule.period.day.name}</span>
+                        <i>${v.schedule.period.time.start} - ${v.schedule.period.time.finish}</i>
+                    </p>
+                    <#else>
+                    Any visiting dais
+                    </#list>
+                </fieldset>
+            </fieldset>
+        <#else>
+            No subscriptions for you !
+        </#list>
+    </#if>
+
+    <!--
+     -->
+
+    <#if schedules??>
+    <h4>Yours work periods :</h4>
+        <#list schedules as s, n>
+            <fieldset style="float: left; margin: 10px; background: #d8eeff">
+                    <div><i>${s.period.day.name}</i></div>
+                    <div>
+                        <span>${s.instruct.discipline.name}</span>
+                        <i>${s.period.time.start} <b>-</b> ${s.period.time.finish}</i>
+                    </div>
+                    <span> Number of clients ${n}</span>
+            </fieldset>
+        <#else>
+            Schedules not found!
+        </#list>
+    </#if>
 </@c.page>
 

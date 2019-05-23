@@ -1,3 +1,4 @@
+<#include "parts/security.ftl">
 <#import "parts/common.ftl" as c>
 
 <style>
@@ -7,13 +8,12 @@
 </style>
 
 <@c.page>
-
-    <div><p>Schedule</p></div>
+<div>Club shedules</div>
     <div>
         <#list days as day, schedule>
             <div style="float: left; margin: 20px">
                 <fieldset>
-                    <legend><b>${day.name}</b> <a href="/schedules/${day.ID}">Edit</a></legend>
+                    <legend><b>${day.name}</b>  <#if isAdmin><a href="/schedules/${day.ID}">Edit</a></#if></legend>
                     <#list schedule as s>
                         <i>${s.ID}</i>
                         <span>${s.instruct.discipline.name}</span>

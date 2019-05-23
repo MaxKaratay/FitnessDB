@@ -5,6 +5,7 @@ import com.karatay.fitdb.repository.ScheduleRepository;
 import com.karatay.fitdb.repository.VisitsRepository;
 import com.karatay.fitdb.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/subscriptions")
 public class SubscriptionController {
     @Autowired
@@ -37,12 +39,6 @@ public class SubscriptionController {
                 model.addAttribute("trainingOverflow", error);
             }
 
-//            Set<Schedule> schedules = subscriptionService.schedulesByInstructWithOutCrossing(instruct, client);
-//            if (schedules.isEmpty()) { // check if client can training in instruct time
-//                model.addAttribute("scheduleEngaged", "Can`t find free schedule in your subscription list !");
-//            } else {
-//                model.addAttribute("schedules", schedules);
-//            }
             model.addAttribute("schedules", subscriptionService.getScheduleService().getScheduleRepository().findAllByInstruct(instruct));
         }
         Iterable<Subscription> subscriptions = subscriptionService.getSubscriptionRepository().findAll();

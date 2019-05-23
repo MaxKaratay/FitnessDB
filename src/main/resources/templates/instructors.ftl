@@ -17,7 +17,6 @@
     <@ci.search "instructors"/>
     <#list instructors as instructor>
         <div>
-            <b>${instructor.ID}</b>
             <span>${instructor.firstName}</span>
             <i>${instructor.lastName}</i>
             <span>${instructor.patronymic}</span>

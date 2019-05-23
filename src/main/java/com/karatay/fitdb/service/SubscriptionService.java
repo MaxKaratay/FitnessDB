@@ -45,28 +45,6 @@ public class SubscriptionService {
                 .collect(Collectors.toList());
     }
 
-    public Set<Schedule> schedulesByInstructWithOutCrossing(Instruct instruct, Client client) {//TODO make it work
-        List<Schedule> schedulesPeriodByClient = allSchedulesByClient(client);
-        Set<Schedule> result = new TreeSet<>(Comparator.comparingInt(e -> e.getPeriod().hashCode()));
-        Iterable<Schedule> allByInstruct = scheduleService.getScheduleRepository().findAllByInstruct(instruct);
-        if (schedulesPeriodByClient.isEmpty()) {
-            for (Schedule s : allByInstruct) {
-                result.add(s);
-            }
-            return result;
-        }
-        for (Schedule sch : allByInstruct) {
-            Period p = sch.getPeriod();
-            for (Schedule clientSch : schedulesPeriodByClient) {
-                if (!p.getDay().getID().equals(clientSch.getPeriod().getDay().getID())
-                        && !p.getTime().getID().equals(clientSch.getPeriod().getTime().getID())) {
-                    result.add(sch);
-                }
-            }
-        }
-        return result;
-    }
-
     /**
      * Method  organise data for report
      *

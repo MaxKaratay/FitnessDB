@@ -1,3 +1,5 @@
+<#include "security.ftl">
+
 <#macro page>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -6,7 +8,7 @@
     <meta charset=UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
     <style>
         body{
-            margin: 0 0 1px;
+            margin: 0 0 0px;
             background: #dcffe7;
         }
         .topnav {
@@ -35,13 +37,24 @@
 <body>
 <div class="topnav">
     <a class="active" href="/">Home</a>
-    <a href="/clients"> Clients list</a>
-    <a href="/instructors"> Instructors list</a>
+    <#if isAdmin><a href="/clients"> Clients list</a></#if>
+    <#if isAdmin><a href="/instructors"> Instructors list</a></#if>
     <a href="/disciplines"> Disciplines list</a>
     <a href="/instructs"> Instruct </a>
     <a href="/schedules"> Schedules </a>
-    <a href="/subscriptions">Subscriptions</a>
-    <a href="/reports"> Report </a>
+    <#if isAdmin><a href="/subscriptions">Subscriptions</a></#if>
+    <#if isAdmin> <a href="/reports"> Report </a></#if>
+    <div style="float: right;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;">
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
 </div>
 <#nested>
 </body>
