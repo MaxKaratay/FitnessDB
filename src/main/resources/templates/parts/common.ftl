@@ -8,7 +8,7 @@
     <meta charset=UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
     <style>
         body{
-            margin: 0 0 0px;
+            margin: 0;
             background: #dcffe7;
         }
         .topnav {
@@ -47,9 +47,8 @@
     <div style="float: right;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;">
+            padding: 10px 10px 0 16px;
+            ">
         <form action="/logout" method="post">
             <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
             <input type="submit" value="Sign Out"/>

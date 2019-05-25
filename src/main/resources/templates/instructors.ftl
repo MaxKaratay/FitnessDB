@@ -13,18 +13,24 @@
             <button type="submit">Add Instructor</button>
         </form>
     </div>
+    <p></p>
     <div>Instructors list</div>
     <@ci.search "instructors"/>
-    <#list instructors as instructor>
-        <div>
-            <span>${instructor.firstName}</span>
-            <i>${instructor.lastName}</i>
-            <span>${instructor.patronymic}</span>
-            <a href="/instructors/${instructor.ID}">Edit</a>
-            <a href="/instructors/delete/${instructor.ID}"
-               onclick="return confirm('Do you really wont to delete ${instructor.firstName} ${instructor.lastName} ?')">Delete</a>
-        </div>
+    <p></p>
+    <table style="border-spacing: 5px">
+    <#list instructors?sort_by("firstName") as instructor>
+        <tr>
+            <td><span>${instructor.firstName}</span></td>
+            <td><i>${instructor.lastName}</i></td>
+            <td><span>${instructor.patronymic}</span></td>
+            <td><a href="/instructors/${instructor.ID}">Edit</a></td>
+            <td>&nbsp;</td>
+            <td><a href="/instructors/delete/${instructor.ID}"
+                   onclick="return confirm('Do you really wont to delete ${instructor.firstName} ${instructor.lastName} ?')">Delete</a>
+            </td>
+        </tr>
     <#else>
         <div>Instructors not found !</div>
     </#list>
+    </table>
 </@c.page>

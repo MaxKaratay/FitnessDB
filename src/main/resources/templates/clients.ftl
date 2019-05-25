@@ -13,19 +13,24 @@
             <button type="submit">Add Client</button>
         </form>
     </div>
-
+    <p></p>
     <div>Clients list</div>
     <@ci.search "clients"/>
-    <#list clients as client>
-        <div>
-            <span>${client.firstName}</span>
-            <span>${client.lastName}</span>
-            <i>${client.patronymic}</i>
-            <a href="/clients/${client.ID}">Edit</a>
-            <a href="/clients/delete/${client.ID}"
-               onclick="return confirm('Do you really wont to delete ${client.firstName} ${client.lastName} ?')">Delete</a>
-        </div>
+    <p></p>
+    <table style="border-spacing: 5px">
+    <#list clients?sort_by('firstName') as client>
+        <tr>
+            <td><span>${client.firstName}</span></td>
+            <td><span>${client.lastName}</span></td>
+            <td><i>${client.patronymic}</i></td>
+            <td><a href="/clients/${client.ID}">Edit</a></td>
+            <td>&nbsp;</td>
+            <td><a href="/clients/delete/${client.ID}"
+                   onclick="return confirm('Do you really wont to delete ${client.firstName} ${client.lastName} ?')">Delete</a>
+            </td>
+        </tr>
     <#else >
         <div>Clients not found !</div>
     </#list>
+    </table>
 </@c.page>

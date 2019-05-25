@@ -3,6 +3,7 @@
 <style>
     fieldset{
         background: #fbffb2;
+        box-sizing: border-box;
     }
 </style>
 
@@ -60,9 +61,11 @@
     <!--
      -->
     <div>List of subscriptions</div><p></p>
-    <div>
+        <div style="display: block">
         <#list subscriptions as sub>
-            <fieldset style="float: left; margin: 10px">
+            <div style="display: inline-block">
+            <fieldset style="margin: 10px 5px 10px 10px;
+                             float: left; ">
                 <legend>${sub.client.firstName} ${sub.client.lastName} ${sub.client.patronymic}
                     <a href="/subscriptions/${sub.ID}">Edit</a>
                 </legend>
@@ -83,8 +86,9 @@
                 <a href="/subscriptions/delete/${sub.ID}"
                    onclick="return confirm('A you realy wont to delete this subscription ?')">Delete</a>
             </fieldset>
+            </div>
         <#else>
             Subscriptions not found
         </#list>
-    </div>
+        </div>
 </@c.page>

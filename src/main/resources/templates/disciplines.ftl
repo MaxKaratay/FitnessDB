@@ -2,13 +2,15 @@
 
 <@c.page>
     <div>Disciplines list</div>
-    <#list disciplines as discipline>
-        <div>
-            <b>${discipline.ID}</b>
-            <span>${discipline.name}</span>
-            <i>Max visitors = ${discipline.maxVisitors}</i>
-        </div>
-    <#else>
+    <p></p>
+    <table style="border-spacing: 5px">
+       <#list disciplines as discipline>
+           <tr>
+               <td><span>${discipline.name}</span></td>
+               <td><i>Max visitors : ${discipline.maxVisitors}</i></td>
+           </tr>
+       <#else>
         <div>Disciplines not found !</div>
-    </#list>
+       </#list>
+    </table>
 </@c.page>

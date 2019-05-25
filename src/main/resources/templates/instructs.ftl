@@ -33,22 +33,22 @@
     </#if>
 
     <div style="margin-bottom: 5px">List of discipline and instructors</div>
-    <div style="float: left">
+    <div style="float: left; margin-left: 15px">
         <#list instructs as discipline, instructors>
             <fieldset>
             <legend><b>${discipline.name}</b>  <#if isAdmin> <a href="/instructs/${discipline.ID}">Edit</a> </#if></legend>
-                <div >
+                <table style="border-spacing: 5px">
                     <#list instructors as instructor, price>
-                        <div class="divv">
-                            <span>${instructor.firstName}</span>
-                            <i>${instructor.lastName}</i>
-                            <span>${instructor.patronymic}</span>
-                            <b><i>with price: ${price}</i></b>
-                        </div>
+                        <tr class="divv">
+                            <td><span>${instructor.firstName}</span></td>
+                            <td><i>${instructor.lastName}</i></td>
+                            <td><span>${instructor.patronymic}</span></td>
+                            <td><b><i>with price: ${price}</i></b></td>
+                        </tr>
                     <#else>
                         <div>None</div>
                     </#list>
-                </div>
+                </table>
             </fieldset>
         <#else>
             <div>Not found</div>

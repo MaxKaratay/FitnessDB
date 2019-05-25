@@ -29,8 +29,8 @@
                      <td scope="rowgroup">${dis.name}</td>
                      <td colspan="3"
                          scope="row">${i.instructor.firstName} ${i.instructor.lastName} ${i.instructor.patronymic}</td>
-                     <td>${num}</td>
-                     <td>${num * i.price}</td>
+                     <td style="text-align: center">${num}</td>
+                     <td style="text-align: right">${num * i.price}</td>
                 </tr>
                 </#list >
         </#list>
