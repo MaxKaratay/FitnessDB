@@ -16,7 +16,7 @@
     Activity result
 </div>
 <div>
-    <table>
+    <table style="background: beige">
         <tr>
             <th scope="col">Discipline</th>
             <th colspan="3">Instructor</th>
@@ -38,5 +38,7 @@
 </div>
 <div style="margin: 10px">
     <label><b style="color: coral">Profit in current month : </b> ${profit}</label>
+    <p></p>
+    <label><b style="color: coral">Number of active clients : </b> ${activeClients}</label>
 </div>
 </@c.page>

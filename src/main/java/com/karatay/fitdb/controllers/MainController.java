@@ -56,11 +56,15 @@ public class MainController {
         Iterable<Subscription> subscriptions = subscriptionService.getSubscriptionRepository()
                 .findAllByDurationEndGreaterThanEqual(Date.valueOf(LocalDate.now()));
         model.addAttribute("subs", subscriptions);
-        model.addAttribute("instructs", subscriptionService.reportData(StreamSupport
-                .stream(subscriptions.spliterator(), false).collect(Collectors.toSet())));
+        Map<Discipline, Map<Instruct, Integer>> reportData = subscriptionService.reportData(StreamSupport
+                .stream(subscriptions.spliterator(), false).collect(Collectors.toSet()));
+        model.addAttribute("instructs", reportData);
         int profit = StreamSupport.stream(subscriptions.spliterator(), false)
                 .map(Subscription::getInstruct).mapToInt(Instruct::getPrice).sum();
         model.addAttribute("profit", profit);
+        int numberOfActiveClients = reportData.values().stream()
+                .flatMap(e -> e.values().stream()).mapToInt(Integer::intValue).sum();
+        model.addAttribute("activeClients", numberOfActiveClients);
         return "reports";
     }
 
